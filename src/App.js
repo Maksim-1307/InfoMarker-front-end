@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header.jsx';
+import UploadField from './components/UploadField.jsx'
+import Note from './components/Note.jsx';
+import Footer from './components/Footer.jsx';
+
+import './style.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div class="wrapper">
+        <Header />
+        <section class="upload-section">
+          <div class="container">
+            <UploadField />
+          </div>
+        </section>
+        <section class="note-section">
+          <div class="container">
+            <Note content={(<>Результаты проверки <b>[InfoMarker]*</b> носят строго рекомендательный
+              характер и не могут использоваться в качестве юридического документа</>)}/>
+          </div>
+        </section>
+      </div>
+      <Footer />
+    </>
   );
 }
 
