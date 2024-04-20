@@ -4,9 +4,9 @@ import infoIcon from '../img/icons/info-icon.svg'
 function Note(props){
 
     return(
-        <div class="note">
+        <div className="note">
             <img class="note__icon" alt="" src={infoIcon}/>
-            <div class="note-text">
+            <div className="note__text">
                 {(props.content)}
             </div>
         </div>

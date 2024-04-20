@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-function submitFile(file, url) {
+function submitFile(file, url, callback) {
+
     console.log('the file: ', file);
     //event.preventDefault()
     //const url = 'http://localhost:3000/uploadFile';
@@ -9,11 +10,11 @@ function submitFile(file, url) {
     formData.append('fileName', file.name);
     const config = {
         headers: {
-            'content-type': 'multipart/form-data',
+            'content-type': 'multipart/form-data'
         },
     };
     axios.post(url, formData, config).then((response) => {
-        console.log('RESPONSE: ', response.data);
+        callback(response);
     });
 
 }
