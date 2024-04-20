@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UploadButton from './UploadButton';
 import fileSubmit from '../helpers/FileUploader.js'
 
@@ -28,12 +28,17 @@ function UploadField(){
         setFile(event.target.files[0]);
         console.log(event.target.files[0]);
         //setWaiting(true); если делать это сразу, то не успеет сохраниться файл. Делать нужно после отправки на сервер, так что ОК
-        fileSubmit(event.target.files[0], 'https://v2.convertapi.com/upload', event); // test url
     }
 
-    function handleFileDropped(){
+    function handleFileDropped(){ 
         return;
     }
+
+    useEffect(() => {
+        if (file) {
+            fileSubmit(file, 'https://v2.convertapi.com/upload'); // test url
+        }
+    }, [file]);
 
     return (
         <div class="upload-field nice-border">
