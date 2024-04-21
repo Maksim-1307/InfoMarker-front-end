@@ -1,5 +1,7 @@
 import Report from "./Report";
 import Note from "./Note";
+import FileContent from "./FileContent";
+
 import { useLocation } from "react-router-dom";
 
 function File() {
@@ -16,7 +18,7 @@ function File() {
         <section class="file-body">
             <div class="container file-body__container">
                 <div class="file-body__left">
-                    <div class="file-body__content">{JSON.stringify(location)}</div>
+                    <FileContent content={location["state"]["content"]}/>
                 </div>
                 <div class="file-body__right">
                     <Note content={noteContent}/>
