@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import update_user_card from "../animations.js";
+import { reload_user_card } from "../animations.js";
 
 function UserCard(){
 
     const avatarStyle = { 'background-image': 'url("../img/default-avatar.jpg");'};
 
     useEffect(() => {
-        update_user_card(); 
+        reload_user_card(); 
     }, []);
 
     return(

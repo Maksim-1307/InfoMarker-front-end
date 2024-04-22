@@ -31,10 +31,10 @@ function nice_border(){
             </div>\
         </div>");
 
-        const borderWidth = 3;
-        const element = $(this).find('.nice-border__element');
-        const width = parseFloat($(this).css("width").slice(0, -2)) + borderWidth * 2;
-        const height = parseFloat($(this).css("height").slice(0, -2)) + borderWidth * 2;
+        let borderWidth = 3;
+        let element = $(this).find('.nice-border__element');
+        let width = parseFloat($(this).css("width").slice(0, -2)) + borderWidth * 2;
+        let height = parseFloat($(this).css("height").slice(0, -2)) + borderWidth * 2;
         element.css({
             "top" : -borderWidth + "px",
             "left": -borderWidth + "px",
@@ -190,4 +190,4 @@ function reload_nice_border(){
     });
 }
 
-export default reload_user_card;
+export {reload_user_card, reload_nice_border};

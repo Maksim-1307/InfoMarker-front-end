@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UploadButton from './UploadButton';
 import fileSubmit from '../helpers/FileUploader.js'
 import { useRef } from 'react';
+import { reload_nice_border } from '../animations.js';
 
 import plusIcon from '../img/icons/plus-icon.svg'
 import preloaderIcon from '../img/icons/preloader.svg'
@@ -65,6 +66,10 @@ function UploadField(){
             setWaiting(false);
         }
     }, [file]);
+
+    useEffect(() => {
+        reload_nice_border();
+    }, []);
 
     function processResponse (response) {
         navigate('/file', {state: response.data});
