@@ -10,24 +10,32 @@ function File() {
         const location = useLocation();
 
         function countStats() {
-            let total = location["state"]["found"].length;
+            
+            let total = Object.keys(location["state"]["found"]).length;
             let count = 0;
-            location["state"]["found"].forEach(element => {
-                count += element.count;
-            });
+
+            for (const [key, value] of Object.entries(location["state"]["found"])) {
+                count += value.count;
+            }
             return {
                 total: total,
                 count: count
             }
         }
 
-        const stats = countStats();
+        let noteContent = "";
 
-        const noteContent = (<>
-            <p>В тексте обнаружено <b>{stats.total}</b> упоминаний <b>{stats.count}</b> иноагентов или нежелательных организаций. </p>
-            <p>Места в тексте с выявленными совпадениямиотмечены цветом. Мы не храним ваши загруженные документы и сформированные отчеты, но вы можете скачать отчет о сверке этого текста в формате pdf. </p>
-            <a class="btn-1" href={location["state"]["download_link"]} download>Скачать отчет</a>
-        </>);
+        try {
+            const stats = countStats();
+
+            noteContent = (<>
+                <p>В тексте обнаружено <b>{stats.total}</b> упоминаний <b>{stats.count}</b> иноагентов или нежелательных организаций. </p>
+                <p>Места в тексте с выявленными совпадениямиотмечены цветом. Мы не храним ваши загруженные документы и сформированные отчеты, но вы можете скачать отчет о сверке этого текста в формате pdf. </p>
+                <a class="btn-1" href={location["state"]["download_link"]} download>Скачать отчет</a>
+            </>);
+        } catch {
+            noteContent = (<p>Ошибка</p>);
+        }
 
         return (
             <section class="file-body">
@@ -42,7 +50,8 @@ function File() {
                 </div>
             </section>
         );
-    } catch {
+    } catch (err) {
+        //throw err; 
         return (
         <section>
             <div class="container">

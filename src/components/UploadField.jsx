@@ -23,7 +23,7 @@ function UploadField(){
         method: "post",
         enctype: "multipart/form-data",
         inputId: "upload-file",
-        inputName: "file",
+        inputName: "new_document",
         labelClass: "btn-1",
         labelText: "Загрузить файл",
         onChange: (event) => {handleFileChoosen(event)}
@@ -72,6 +72,7 @@ function UploadField(){
     }, []);
 
     function processResponse (response) {
+        console.log("data: ", response.data);
         navigate('/file', {state: response.data});
     }
 
