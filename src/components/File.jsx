@@ -3,6 +3,7 @@ import Note from "./Note";
 import FileContent from "./FileContent";
 
 import { useLocation } from "react-router-dom";
+import Finder from "./Finder.jsx";
 
 function File() {
 
@@ -46,6 +47,7 @@ function File() {
                     <div class="file-body__right">
                         <Note content={noteContent} />
                         <Report content={location["state"]["found"]} />
+                        <Finder />
                     </div>
                 </div>
             </section>
