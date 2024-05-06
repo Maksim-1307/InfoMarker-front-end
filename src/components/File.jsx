@@ -4,6 +4,8 @@ import FileContent from "./FileContent";
 
 import { useLocation } from "react-router-dom";
 import Finder from "./Finder.jsx";
+import FileContextProvider from "./FileContext.js";
+import { useContext } from "react";
 
 function File() {
 
@@ -39,18 +41,20 @@ function File() {
         }
 
         return (
-            <section class="file-body">
-                <div class="container file-body__container">
-                    <div class="file-body__left">
-                        <FileContent content={location["state"]["content"]} />
+            <FileContextProvider>
+                <section class="file-body">
+                    <div class="container file-body__container">
+                        <div class="file-body__left">
+                            <FileContent content={location["state"]["content"]} />
+                        </div>
+                        <div class="file-body__right">
+                            <Note content={noteContent} />
+                            <Report content={location["state"]["found"]} />
+                            <Finder />
+                        </div>
                     </div>
-                    <div class="file-body__right">
-                        <Note content={noteContent} />
-                        <Report content={location["state"]["found"]} />
-                        <Finder />
-                    </div>
-                </div>
-            </section>
+                </section>
+            </FileContextProvider>
         );
     } catch (err) {
         //throw err; 
