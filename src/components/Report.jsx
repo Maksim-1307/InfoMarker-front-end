@@ -1,19 +1,21 @@
 
-import React, { createElement } from 'react';
+import React, { createElement, useState } from 'react';
 import "./Report.scss"
+import { fileContext } from "./FileContext";
+import { useContext } from 'react';
 
 function Report(props) {
 
-    try{
+    const {setName} = useContext(fileContext);
 
-        console.log(props);
+    try{
         
         const reportList = [];
         for (let name in props.content){
             const color = props.content[name].color;
             const count = props.content[name].count;
             reportList.push((
-                <div class="report-table__row" style={{ background: "#" + color }}>
+                <div class="report-table__row" style={{ background: "#" + color}} onClick={()=>{setName(name)}}>
                     <div>{name}</div>
                     <div><b>{count}</b></div>
                 </div>

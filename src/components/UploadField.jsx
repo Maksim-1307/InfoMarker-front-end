@@ -60,7 +60,7 @@ function UploadField(){
 
     useEffect(() => {
         if (file) {
-            fileSubmit(file, 'https://info-marker.ru/api/files/upload.php', processResponse);
+            fileSubmit(file, 'https://api.info-marker.ru/api/files/upload.php', processResponse);
             setWaiting(true);
         } else {
             setWaiting(false);

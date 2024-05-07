@@ -50,7 +50,7 @@ function File() {
                         <div class="file-body__right">
                             <Note content={noteContent} />
                             <Report content={location["state"]["found"]} />
-                            <Finder />
+                            <Finder data={location["state"]["found"]} />
                         </div>
                     </div>
                 </section>
