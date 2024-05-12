@@ -6,6 +6,7 @@ import UploadField from './components/UploadField.jsx'
 import Note from './components/Note.jsx';
 import Footer from './components/Footer.jsx';
 import File from "./components/File.jsx";
+import Registration from "./components/Registration.jsx";
 
 import './style.css'
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" Component={UploadField} />
           <Route path="/file" Component={File} />
+          <Route path="/registration" Component={Registration} />
         </Routes>
         <section class="note-section">
           <div class="container">
