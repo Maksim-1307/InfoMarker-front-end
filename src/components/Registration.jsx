@@ -12,7 +12,13 @@ function Registration(){
     });
     
 
-    return (<Form json={json} />);
+    return (
+        <section class="auth-section">
+            <div class="container">
+                <Form json={json} />
+            </div>
+        </section>
+    );
 
 }
 

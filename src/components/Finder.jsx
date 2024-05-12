@@ -48,7 +48,7 @@ function Finder (props) {
     function move(val) {
         if (!elements.length) return;
         let newId = id + val;
-        if (newId < 0){
+        if (newId < 0){ 
             newId += elements.length;
         }
         newId = newId % elements.length;

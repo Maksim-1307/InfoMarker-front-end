@@ -8,6 +8,12 @@
     &__error{
         font-size: 14px;
         color: red;
+        background-color: rgba($color: red, $alpha: 0.3);
+    }
+
+    &__input {
+        width: 100%;
+        display: block;
     }
 
     & + & {

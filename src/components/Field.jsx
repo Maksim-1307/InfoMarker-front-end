@@ -18,7 +18,7 @@ function Field(props) {
 
     return (
         <div className="field">
-        <input ref={fieldRef} className="form-field" {...data}></input>
+        <input ref={fieldRef} className="field__input" {...data}></input>
         { error }
         </div>
     );
