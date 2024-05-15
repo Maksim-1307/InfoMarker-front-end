@@ -23,7 +23,7 @@
     "webpack": "^5.91.0"
   },
   "scripts": {
-    "start": "wait-on --delay 500 && react-scripts start",
+    "start": "wait-on --delay 1000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

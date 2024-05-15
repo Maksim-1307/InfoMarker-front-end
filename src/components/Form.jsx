@@ -3,33 +3,37 @@ import './Form.scss'
 import axios from "axios";
 import Field from "./Field";
 import { json } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Form(props) {
 
     const [data, setData] = useState();
     const [fields, setFields] = useState([]);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
+        if (data && data.success) {
+            navigate('/login', { state: { message: "Добро пожаловать в [InfoMarker]*!"} });
+        }
         if (data && data.fields){
             console.log("Current data is: ", data);
             let newFields = [];
             data.fields.forEach(field => {
                 newFields.push((<Field json={field} />));
             });
-            setFields(newFields);
+            setFields(newFields); 
         }
-    }, [data]); 
+    }, [data]);  
 
     useEffect(()=>{
         if (!data) setData(props.json);
     });
     
     if (!data) {
-        console.log(typeof props.json);
         return ("Ошибка загрузки формы");
     }
-    
+
     if (!data.fields){
         console.log(data);
         return("Ошибка загрузки формы");
@@ -39,22 +43,28 @@ function Form(props) {
     const handle = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const formDataObject = {};
-        formData.forEach((value, key) => {
-            formDataObject[key] = value;
-        });
+        //const formDataObject = {};
+        //console.log(formData);
+        // formData.forEach((value, key) => {
+            // formData[key] = value;
+        // });
 
+        for (let pair of formData.entries()){
+            console.log(pair[0], ' => ', pair[1]);
+        }
 
-        console.log("HANDLE CALLED");
-        console.log("FROMDATA", formDataObject);
-        console.log(JSON.stringify(formDataObject));
+        console.log(event.target);  
+
+        function replacer(key, value) {
+            if (typeof value === "function" || value instanceof Error) {
+                return undefined; // удаляем функции или ошибки
+            }
+            return value;
+        }
         
         fetch(event.target.action, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formDataObject)
+            body: formData
         })
         .then((response) => response.json())
         .then((json) => setData(json));

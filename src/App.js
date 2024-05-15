@@ -9,6 +9,7 @@ import File from "./components/File.jsx";
 import Registration from "./components/Registration.jsx";
 import { AppContext } from "./AppContext.js";
 import AppContextProvider from "./AppContext.js";
+import Login from "./components/Login.jsx";
 
 import './style.css'
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" Component={UploadField} />
             <Route path="/file" Component={File} />
             <Route path="/registration" Component={Registration} />
+            <Route path="/login" Component={Login} />
           </Routes>
           <section class="note-section">
             <div class="container">
