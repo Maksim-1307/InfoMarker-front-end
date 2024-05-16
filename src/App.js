@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from './components/Header.jsx';
@@ -23,7 +23,7 @@ function App() {
           <Routes>
             <Route path="/" Component={UploadField} />
             <Route path="/file" Component={File} />
-            <Route path="/registration" Component={Registration} />
+            <Route path="/register" Component={Registration} />
             <Route path="/login" Component={Login} />
           </Routes>
           <section class="note-section">

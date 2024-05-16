@@ -1,16 +1,29 @@
 import { useState } from "react";
 import Form from "./Form";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { setLoggedIn, setIsAdmin } from "../AppContext.js"
+import { useContext } from "react";
+import { AppContext } from "../AppContext.js";
 
 function Login() {
 
     const location = useLocation();
-    console.log(location);
+
+    const [json, setJson] = useState();
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+
+    useState(() => {
+        fetch("https://api.info-marker.ru/api/user/login.php")
+            .then((response) => response.json())
+            .then((json) => setJson(json));
+    });
 
     return (
         <section class="auth-section">
             <div class="container">
-                <h1>{(location["state"].message)}</h1>
+                <h1>{(message)}</h1>
+                <Form json={json} onSuccess={()=>{navigate("/")}}></Form>
             </div>
         </section>
     );

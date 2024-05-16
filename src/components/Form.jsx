@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './Form.scss'
-import axios from "axios";
 import Field from "./Field";
-import { json } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext";
 
 function Form(props) {
 
@@ -11,10 +10,19 @@ function Form(props) {
     const [fields, setFields] = useState([]);
     const navigate = useNavigate();
 
+    const appContext = useContext(AppContext);
+    const { redirect } = appContext;
+    const { setRedirect } = appContext;
+
+    console.log("APPCONTEXT", useContext(AppContext));
 
     useEffect(() => {
         if (data && data.success) {
-            navigate('/login', { state: { message: "Добро пожаловать в [InfoMarker]*!"} });
+            if (props.onSuccess){
+                props.onSuccess();
+            }
+        } else {
+            console.log("not data or not success");
         }
         if (data && data.fields){
             console.log("Current data is: ", data);
@@ -22,7 +30,7 @@ function Form(props) {
             data.fields.forEach(field => {
                 newFields.push((<Field json={field} />));
             });
-            setFields(newFields); 
+            setFields(newFields);
         }
     }, [data]);  
 
@@ -34,20 +42,15 @@ function Form(props) {
         return ("Ошибка загрузки формы");
     }
 
-    if (!data.fields){
-        console.log(data);
-        return("Ошибка загрузки формы");
-    }
+    // if (!data.fields){
+        // console.log(data);
+        // return("Ошибка загрузки формы");
+    // }
     
 
     const handle = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        //const formDataObject = {};
-        //console.log(formData);
-        // formData.forEach((value, key) => {
-            // formData[key] = value;
-        // });
 
         for (let pair of formData.entries()){
             console.log(pair[0], ' => ', pair[1]);
@@ -57,7 +60,7 @@ function Form(props) {
 
         function replacer(key, value) {
             if (typeof value === "function" || value instanceof Error) {
-                return undefined; // удаляем функции или ошибки
+                return undefined; 
             }
             return value;
         }

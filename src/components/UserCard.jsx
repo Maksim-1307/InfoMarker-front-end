@@ -8,6 +8,7 @@ function UserCard(){
     const appContext = useContext(AppContext);
     const { loggedIn } = appContext;
     const { isAdmin } = appContext;
+    const { setIsAdmin } = appContext;
 
     const avatar = defaultAvatar;
 
@@ -55,6 +56,8 @@ function UserCard(){
 
     const [currentCard, setCurrentCard] = useState(unknownUserCard);
 
+    
+
     useEffect(() => {
         if (loggedIn) {
             if (isAdmin) {
@@ -64,6 +67,7 @@ function UserCard(){
             }
         } else {
             setCurrentCard(unknownUserCard);
+            setIsAdmin(true);
         }
     }, [loggedIn, isAdmin]);
 
