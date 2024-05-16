@@ -12,6 +12,7 @@ function Login() {
     const [json, setJson] = useState();
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
+    const {setLoggedIn} = useContext(AppContext);
 
     useState(() => {
         fetch("https://api.info-marker.ru/api/user/login.php")
@@ -23,7 +24,7 @@ function Login() {
         <section class="auth-section">
             <div class="container">
                 <h1>{(message)}</h1>
-                <Form json={json} onSuccess={()=>{navigate("/")}}></Form>
+                <Form json={json} onSuccess={()=>{navigate("/");setLoggedIn(true)}}></Form>
             </div>
         </section>
     );
